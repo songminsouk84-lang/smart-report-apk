@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
             // Semi-transparent scrim so text stays readable
             val scrimView = View(this@MainActivity).apply {
-                setBackgroundColor(Color.argb(153, 15, 23, 42))
+                setBackgroundColor(Color.argb(79, 15, 23, 42))
                 layoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
