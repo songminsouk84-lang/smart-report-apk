@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Fullscreen Immersive Mode
         @Suppress("DEPRECATION")
         window.decorView.systemUiVisibility = (
             View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         )
 
-        // Root layout with WebView + Top Loading ProgressBar
         val rootLayout = FrameLayout(this)
         webView = WebView(this)
         progressBar = ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply {
@@ -66,9 +64,8 @@ class MainActivity : AppCompatActivity() {
         rootLayout.addView(webView)
         rootLayout.addView(progressBar)
         
-        // Custom Splash / Welcome Overlay with user's Background Image & Custom Texts
         splashOverlay = FrameLayout(this).apply {
-            setBackgroundColor(Color.parseColor("#709bf0"))
+            setBackgroundColor(Color.parseColor("#709cf5"))
             
             val bgView = ImageView(this@MainActivity).apply {
                 setImageResource(R.drawable.app_bg)
@@ -80,9 +77,8 @@ class MainActivity : AppCompatActivity() {
             }
             addView(bgView)
 
-            // Semi-transparent scrim so text stays readable
             val scrimView = View(this@MainActivity).apply {
-                setBackgroundColor(Color.argb(71, 15, 23, 42))
+                setBackgroundColor(Color.argb(43, 15, 23, 42))
                 layoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
@@ -109,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             }
             contentBox.addView(iconView)
 
-            val titleText = "Smart Report ພ້ອມ ແລ້ວ !"
+            val titleText = "Smart report"
             if (titleText.isNotEmpty()) {
                 val titleView = TextView(this@MainActivity).apply {
                     text = titleText
@@ -133,7 +129,6 @@ class MainActivity : AppCompatActivity() {
                 contentBox.addView(descView)
             }
 
-            // Action Button configured by user (In-App WebView vs External Browser)
             val actionBtn = Button(this@MainActivity).apply {
                 text = "ເຂົ້າລະບົບ ↗"
                 setTextColor(Color.WHITE)
@@ -153,7 +148,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 setOnClickListener {
                     
-                    // Open real website in external Android Browser (Chrome / Default Browser)
                     try {
                         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(homeUrl))
                         startActivity(browserIntent)
@@ -178,14 +172,13 @@ class MainActivity : AppCompatActivity() {
         webSettings.allowFileAccess = true
         webSettings.allowContentAccess = true
         webSettings.javaScriptCanOpenWindowsAutomatically = true
-        webSettings.setSupportZoom(false)
-        webSettings.builtInZoomControls = false
+        webSettings.setSupportZoom(true)
+        webSettings.builtInZoomControls = true
         webSettings.displayZoomControls = false
         webSettings.loadWithOverviewMode = true
         webSettings.useWideViewPort = true
         webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         
-        // Fix Google Sites / Google Login / Embedded Forms compatibility (remove '; wv')
         webSettings.userAgentString = webSettings.userAgentString.replace("; wv", "")
         CookieManager.getInstance().setAcceptCookie(true)
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
@@ -193,11 +186,9 @@ class MainActivity : AppCompatActivity() {
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val url = request?.url?.toString() ?: return false
-                // Keep HTTP/HTTPS links inside the app WebView
                 if (url.startsWith("http://") || url.startsWith("https://")) {
                     return false
                 }
-                // Open tel:, mailto:, whatsapp:, intent: with external Android apps
                 return try {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     startActivity(intent)
@@ -209,7 +200,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                // External browser mode keeps welcome screen visible
+                // External browser mode
             }
 
             override fun onReceivedError(
@@ -224,7 +215,7 @@ class MainActivity : AppCompatActivity() {
                         <body style="font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;margin:0;background:#0f172a;color:#fff;text-align:center;padding:24px;">
                             <h2 style="margin-bottom:8px;">ບໍ່ສາມາດເຊື່ອມຕໍ່ອິນເຕີເນັດໄດ້</h2>
                             <p style="color:#94a3b8;font-size:14px;">ກະລຸນາກວດສອບການເຊື່ອມຕໍ່ເນັດຂອງທ່ານ ແລ້ວລອງໃໝ່ອີກຄັ້ງ</p>
-                            <button onclick="window.location.href='$homeUrl'" style="margin-top:16px;padding:12px 24px;border:none;border-radius:12px;background:#709bf0;color:#fff;font-size:15px;font-weight:bold;">ລອງໂຫຼດໃໝ່</button>
+                            <button onclick="window.location.href='$homeUrl'" style="margin-top:16px;padding:12px 24px;border:none;border-radius:12px;background:#709cf5;color:#fff;font-size:15px;font-weight:bold;">ລອງໂຫຼດໃໝ່</button>
                         </body>
                         </html>
                     """.trimIndent()
@@ -240,7 +231,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         
-        // Enable downloading PDF/Excel reports directly to Android Downloads folder
         webView.setDownloadListener { url, userAgent, contentDisposition, mimetype, _ ->
             try {
                 val request = DownloadManager.Request(Uri.parse(url))
@@ -261,10 +251,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Load Target Website or Local HTML Asset
-        // External browser mode: website opens via external browser button
+        // External browser mode
         
-        // Handle Android Hardware Back Button
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (webView.canGoBack()) {

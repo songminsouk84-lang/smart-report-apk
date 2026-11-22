@@ -37,19 +37,19 @@ jobs:
         run: gradle assembleDebug --no-daemon --stacktrace
 
       - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk "SmartReport.apk"
+        run: cp app/build/outputs/apk/debug/app-debug.apk "Smartreport.apk"
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: com.smartreport.app-apk
-          path: SmartReport.apk
+          path: Smartreport.apk
 
       - name: Publish Direct Download APK Release
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "v${{ github.run_number }}-${{ github.run_id }}" "SmartReport.apk" \
-            --title "Smart Report v1.0.0 (Build #${{ github.run_number }})" \
-            --notes "Compiled automatically by Web2APK Studio Cloud Build"
+          gh release create "v${{ github.run_number }}-${{ github.run_id }}" "Smartreport.apk" \
+            --title "Smart report v1.0.0 (Build #${{ github.run_number }})" \
+            --notes "Compiled automatically by Web2App Studio Cloud Build"
