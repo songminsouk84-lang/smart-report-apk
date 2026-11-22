@@ -11,7 +11,7 @@ android {
         applicationId "com.smartreport.app"
         minSdk 24
         targetSdk 34
-        versionCode 1
+        versionCode 179533887
         versionName "1.0.0"
     }
 
