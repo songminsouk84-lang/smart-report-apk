@@ -175,8 +175,8 @@ class MainActivity : AppCompatActivity() {
         webSettings.allowFileAccess = true
         webSettings.allowContentAccess = true
         webSettings.javaScriptCanOpenWindowsAutomatically = true
-        webSettings.setSupportZoom(false)
-        webSettings.builtInZoomControls = false
+        webSettings.setSupportZoom(true)
+        webSettings.builtInZoomControls = true
         webSettings.displayZoomControls = false
         webSettings.loadWithOverviewMode = true
         webSettings.useWideViewPort = true
