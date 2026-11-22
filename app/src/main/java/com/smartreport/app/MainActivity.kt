@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         
         // Custom Splash / Welcome Overlay with user's Background Image & Custom Texts
         splashOverlay = FrameLayout(this).apply {
-            setBackgroundColor(Color.parseColor("#10b981"))
+            setBackgroundColor(Color.parseColor("#61a8f5"))
             
             val bgView = ImageView(this@MainActivity).apply {
                 setImageResource(R.drawable.app_bg)
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             contentBox.addView(iconView)
 
             val titleView = TextView(this@MainActivity).apply {
-                text = "ພ້ອມ Run ໃນແອັບ Android!"
+                text = "Smart Report"
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 setTypeface(null, Typeface.BOLD)
@@ -175,8 +175,8 @@ class MainActivity : AppCompatActivity() {
         webSettings.allowFileAccess = true
         webSettings.allowContentAccess = true
         webSettings.javaScriptCanOpenWindowsAutomatically = true
-        webSettings.setSupportZoom(true)
-        webSettings.builtInZoomControls = true
+        webSettings.setSupportZoom(false)
+        webSettings.builtInZoomControls = false
         webSettings.displayZoomControls = false
         webSettings.loadWithOverviewMode = true
         webSettings.useWideViewPort = true
@@ -221,7 +221,7 @@ class MainActivity : AppCompatActivity() {
                         <body style="font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;margin:0;background:#0f172a;color:#fff;text-align:center;padding:24px;">
                             <h2 style="margin-bottom:8px;">ບໍ່ສາມາດເຊື່ອມຕໍ່ອິນເຕີເນັດໄດ້</h2>
                             <p style="color:#94a3b8;font-size:14px;">ກະລຸນາກວດສອບການເຊື່ອມຕໍ່ເນັດຂອງທ່ານ ແລ້ວລອງໃໝ່ອີກຄັ້ງ</p>
-                            <button onclick="window.location.href='$homeUrl'" style="margin-top:16px;padding:12px 24px;border:none;border-radius:12px;background:#10b981;color:#fff;font-size:15px;font-weight:bold;">ລອງໂຫຼດໃໝ່</button>
+                            <button onclick="window.location.href='$homeUrl'" style="margin-top:16px;padding:12px 24px;border:none;border-radius:12px;background:#61a8f5;color:#fff;font-size:15px;font-weight:bold;">ລອງໂຫຼດໃໝ່</button>
                         </body>
                         </html>
                     """.trimIndent()
