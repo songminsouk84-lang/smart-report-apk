@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
             // Semi-transparent scrim so text stays readable
             val scrimView = View(this@MainActivity).apply {
-                setBackgroundColor(Color.argb(128, 15, 23, 42))
+                setBackgroundColor(Color.argb(153, 15, 23, 42))
                 layoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             contentBox.addView(iconView)
 
             val titleView = TextView(this@MainActivity).apply {
-                text = "Smart Report"
+                text = "ພ້ອມ Run ໃນແອັບ Android!"
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 setTypeface(null, Typeface.BOLD)
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
             }
             contentBox.addView(titleView)
 
-            val descText = "ທ່ານຕ້ອງການ ຮ່າງ  ເອກະສານ, ບົດວິທະຍານິພົນ ນີ້ເລີຍ ຜູ້ຊ່ວຍ ອັດສະລິຍະ"
+            val descText = "ທ່ານຕ້ອງການ ຮ່າງບົດລາຍງານ , ບົດວິທະຍານິພົນ ນີ້ເລີຍ ມາລິສາຜູ້ຊ່ວຍ ອັດສະລິຍະ"
             if (descText.isNotEmpty()) {
                 val descView = TextView(this@MainActivity).apply {
                     text = descText
@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
 
             // Action Button configured by user (In-App WebView vs External Browser)
             val actionBtn = Button(this@MainActivity).apply {
-                text = "ເຂົ້າລະບົບ"
+                text = "ເຂົ້າລະບົບ ↗"
                 setTextColor(Color.WHITE)
                 textSize = 14f
                 isAllCaps = false

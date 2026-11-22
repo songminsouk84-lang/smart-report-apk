@@ -3,8 +3,8 @@
 
 ## ຂໍ້ມູນແອັບ
 - ຊື່ແອັບ: Smart Report
-- Package ID: smartreport.app
-- ເວີຊັ່ນ: 2.0.0
+- Package ID: com.smartreport.app
+- ເວີຊັ່ນ: 1.0.0
 - ແຫຼ່ງຂໍ້ມູນ: https://sites.google.com/view/smart-report/home
 
 ## ວິທີສ້າງໄຟລ໌ .APK ອອນລາຍຟຣີຜ່ານ GitHub (ບໍ່ຕ້ອງລົງໂປຣແກຣມ)

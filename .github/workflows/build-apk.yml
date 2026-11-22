@@ -22,13 +22,19 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Accept Android SDK Licenses
+        run: |
+          if [ -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+            yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true
+          fi
+
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.4'
 
       - name: Build Debug APK
-        run: gradle assembleDebug
+        run: gradle assembleDebug --no-daemon --stacktrace
 
       - name: Rename APK
         run: cp app/build/outputs/apk/debug/app-debug.apk "SmartReport.apk"
@@ -36,13 +42,14 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: smartreport.app-apk
+          name: com.smartreport.app-apk
           path: SmartReport.apk
 
       - name: Publish Direct Download APK Release
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "v${{ github.run_number }}-${{ github.run_id }}" "SmartReport.apk" \
-            --title "Smart Report v2.0.0 (Build #${{ github.run_number }})" \
+            --title "Smart Report v1.0.0 (Build #${{ github.run_number }})" \
             --notes "Compiled automatically by Web2APK Studio Cloud Build"
