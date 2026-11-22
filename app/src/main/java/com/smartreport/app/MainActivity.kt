@@ -61,6 +61,15 @@ class MainActivity : AppCompatActivity() {
         splashOverlay = FrameLayout(this).apply {
             setBackgroundColor(Color.parseColor("#10b981"))
             
+            val bgView = ImageView(this@MainActivity).apply {
+                setImageResource(R.drawable.app_bg)
+                scaleType = ImageView.ScaleType.CENTER_CROP
+                layoutParams = FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+                )
+            }
+            addView(bgView)
 
             // Semi-transparent scrim so text stays readable
             val scrimView = View(this@MainActivity).apply {
@@ -92,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             contentBox.addView(iconView)
 
             val titleView = TextView(this@MainActivity).apply {
-                text = "ພ້ອມ Run ໃນແອັບ Android!"
+                text = "ນ້ອງມະລິສາ ພ້ອມຮັບໃຊ້ແລ້ວຈ້າວ"
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 setTypeface(null, Typeface.BOLD)
@@ -100,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             }
             contentBox.addView(titleView)
 
-            val descText = "ເວັບໄຊ້ sites.google.com ປ້ອງກັນການສະແດງຜົນໃນ iframe ຂອງບຣາວເຊີ, ແຕ່ຈະເປີດໃຊ້ງານໄດ້ເຕັມຮູບແບບ 100% ໃນໄຟລ໌ .APK ຂອງທ່ານ."
+            val descText = "ທ່ານຕ້ອງການຮ່າງເອກະສານ , ບົດວິທະຍານິພົນ ແອບນີ້ເລີຍ Smart Report"
             if (descText.isNotEmpty()) {
                 val descView = TextView(this@MainActivity).apply {
                     text = descText
