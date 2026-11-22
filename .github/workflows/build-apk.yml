@@ -36,7 +36,7 @@ jobs:
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: com.smartreport.app-apk
+          name: smartreport.app-apk
           path: SmartReport.apk
 
       - name: Publish Direct Download APK Release
@@ -44,5 +44,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "v${{ github.run_number }}-${{ github.run_id }}" "SmartReport.apk" \
-            --title "Smart Report v1.0.0 (Build #${{ github.run_number }})" \
+            --title "Smart Report v2.0.0 (Build #${{ github.run_number }})" \
             --notes "Compiled automatically by Web2APK Studio Cloud Build"

@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace 'com.smartreport.app'
+    namespace 'smartreport.app'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.smartreport.app"
+        applicationId "smartreport.app"
         minSdk 24
         targetSdk 34
         versionCode 1
-        versionName "1.0.0"
+        versionName "2.0.0"
     }
 
     buildTypes {
