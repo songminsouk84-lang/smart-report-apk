@@ -5,6 +5,7 @@ import android.app.DownloadManager
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -20,6 +21,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -40,6 +42,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        // Fullscreen Immersive Mode
+        @Suppress("DEPRECATION")
+        window.decorView.systemUiVisibility = (
+            View.SYSTEM_UI_FLAG_FULLSCREEN
+            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        )
 
         // Root layout with WebView + Top Loading ProgressBar
         val rootLayout = FrameLayout(this)
@@ -101,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             contentBox.addView(iconView)
 
             val titleView = TextView(this@MainActivity).apply {
-                text = "ນ້ອງມະລິສາ ພ້ອມຮັບໃຊ້ແລ້ວຈ້າວ"
+                text = "Smart Report"
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 setTypeface(null, Typeface.BOLD)
@@ -109,31 +118,54 @@ class MainActivity : AppCompatActivity() {
             }
             contentBox.addView(titleView)
 
-            val descText = "ທ່ານຕ້ອງການຮ່າງເອກະສານ , ບົດວິທະຍານິພົນ ແອບນີ້ເລີຍ Smart Report"
+            val descText = "ທ່ານຕ້ອງການ ຮ່າງບົດລາຍງານ , ບົດວິທະຍານິພົນ ນີ້ເລີຍ ມາລິສາຜູ້ຊ່ວຍ ອັດສະລິຍະ"
             if (descText.isNotEmpty()) {
                 val descView = TextView(this@MainActivity).apply {
                     text = descText
                     setTextColor(Color.parseColor("#E2E8F0"))
                     textSize = 14f
                     gravity = Gravity.CENTER
-                    setPadding(0, 16, 0, 32)
+                    setPadding(0, 16, 0, 28)
                 }
                 contentBox.addView(descView)
             }
 
-            val spinner = ProgressBar(this@MainActivity).apply {
-                isIndeterminate = true
+            // Action Button configured by user (In-App WebView vs External Browser)
+            val actionBtn = Button(this@MainActivity).apply {
+                text = "ເຂົ້າລະບົບ"
+                setTextColor(Color.WHITE)
+                textSize = 14f
+                isAllCaps = false
+                setTypeface(null, Typeface.BOLD)
+                setPadding(48, 28, 48, 28)
+                background = GradientDrawable().apply {
+                    setColor(Color.parseColor("#0284c7"))
+                    cornerRadius = 32f
+                }
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = 12
+                }
+                setOnClickListener {
+                    
+                    // Open real website in external Android Browser (Chrome / Default Browser)
+                    try {
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(homeUrl))
+                        startActivity(browserIntent)
+                    } catch (e: Exception) {
+                        Toast.makeText(this@MainActivity, "ບໍ່ພົບບຣາວເຊີໃນເຄື່ອງ", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-            contentBox.addView(spinner)
+            contentBox.addView(actionBtn)
+            
 
             addView(contentBox)
         }
         rootLayout.addView(splashOverlay)
-
-        // Automatically dismiss splash screen after 2.5 seconds max
-        Handler(Looper.getMainLooper()).postDelayed({
-            hideSplash()
-        }, 2500)
+        
         setContentView(rootLayout)
 
         val webSettings: WebSettings = webView.settings
@@ -174,7 +206,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                hideSplash()
+                // External browser mode keeps welcome screen visible
             }
 
             override fun onReceivedError(
@@ -227,7 +259,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Load Target Website or Local HTML Asset
-        webView.loadUrl(homeUrl)
+        // External browser mode: website opens via external browser button
         
         // Handle Android Hardware Back Button
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
