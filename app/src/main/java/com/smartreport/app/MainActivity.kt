@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private lateinit var progressBar: ProgressBar
     private var splashOverlay: FrameLayout? = null
-    private val homeUrl = "https://sites.google.com/view/bolchvoice/champa"
+    private val homeUrl = "https://sites.google.com/view/smart-report/home"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
             // Semi-transparent scrim so text stays readable
             val scrimView = View(this@MainActivity).apply {
-                setBackgroundColor(Color.argb(79, 15, 23, 42))
+                setBackgroundColor(Color.argb(128, 15, 23, 42))
                 layoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             contentBox.addView(iconView)
 
             val titleView = TextView(this@MainActivity).apply {
-                text = "Champa"
+                text = "Smart Report"
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 setTypeface(null, Typeface.BOLD)
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
             }
             contentBox.addView(titleView)
 
-            val descText = "ນ້ອງ ຈໍາປາ ຜູ້ຊ່ວຍ ອັດສະລິຍະ"
+            val descText = "ທ່ານຕ້ອງການ ຮ່າງ  ເອກະສານ, ບົດວິທະຍານິພົນ ນີ້ເລີຍ ຜູ້ຊ່ວຍ ອັດສະລິຍະ"
             if (descText.isNotEmpty()) {
                 val descView = TextView(this@MainActivity).apply {
                     text = descText
@@ -175,8 +175,8 @@ class MainActivity : AppCompatActivity() {
         webSettings.allowFileAccess = true
         webSettings.allowContentAccess = true
         webSettings.javaScriptCanOpenWindowsAutomatically = true
-        webSettings.setSupportZoom(false)
-        webSettings.builtInZoomControls = false
+        webSettings.setSupportZoom(true)
+        webSettings.builtInZoomControls = true
         webSettings.displayZoomControls = false
         webSettings.loadWithOverviewMode = true
         webSettings.useWideViewPort = true
