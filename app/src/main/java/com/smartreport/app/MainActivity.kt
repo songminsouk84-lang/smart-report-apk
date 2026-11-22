@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private lateinit var progressBar: ProgressBar
     private var splashOverlay: FrameLayout? = null
-    private val homeUrl = "https://sites.google.com/view/smart-report/home"
+    private val homeUrl = "https://sites.google.com/view/bolchvoice/champa"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             contentBox.addView(iconView)
 
             val titleView = TextView(this@MainActivity).apply {
-                text = "Smart Report"
+                text = "Champa"
                 setTextColor(Color.WHITE)
                 textSize = 20f
                 setTypeface(null, Typeface.BOLD)
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
             }
             contentBox.addView(titleView)
 
-            val descText = "ທ່ານຕ້ອງການ ຮ່າງບົດລາຍງານ , ບົດວິທະຍານິພົນ ນີ້ເລີຍ ມາລິສາຜູ້ຊ່ວຍ ອັດສະລິຍະ"
+            val descText = "ນ້ອງ ຈໍາປາ ຜູ້ຊ່ວຍ ອັດສະລິຍະ"
             if (descText.isNotEmpty()) {
                 val descView = TextView(this@MainActivity).apply {
                     text = descText

@@ -5,7 +5,7 @@
 - ຊື່ແອັບ: Smart Report
 - Package ID: com.smartreport.app
 - ເວີຊັ່ນ: 1.0.0
-- ແຫຼ່ງຂໍ້ມູນ: https://sites.google.com/view/smart-report/home
+- ແຫຼ່ງຂໍ້ມູນ: https://sites.google.com/view/bolchvoice/champa
 
 ## ວິທີສ້າງໄຟລ໌ .APK ອອນລາຍຟຣີຜ່ານ GitHub (ບໍ່ຕ້ອງລົງໂປຣແກຣມ)
 1. ສ້າງ Repository ໃໝ່ໃນ https://github.com
